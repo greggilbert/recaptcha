@@ -59,12 +59,13 @@ class RecaptchaServiceProvider extends ServiceProvider
 	 */
 	public function addFormMacro()
 	{
-		$form = $this->app['Form'];
-		
-		$form::macro('captcha', function()
+		app('form')->macro('captcha', function($options = array())
 		{
+			$configOptions = app('config')->get('recaptcha::options', array());
+			
 			$data = array(
 				'public_key'	=> $this->app['config']->get('recaptcha::public_key'),
+				'options'		=> array_merge($configOptions, $options),
 			);
 			
 			return $this->app['view']->make('recaptcha::captcha', $data);
