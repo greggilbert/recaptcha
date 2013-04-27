@@ -39,3 +39,24 @@ Add the following line to the `require` section of `composer.json`:
 ```
 
 It's also recommended to add `required` when validating.
+
+## Customization
+
+reCAPTCHA allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/customization). You can configure the output of the captcha in several ways.
+
+In the `config.php`, you can create an `options` array to set the default behavior. For example:
+
+```php
+    // ...
+    'options' => array(
+		'theme' => 'white',
+	),
+```
+
+would default all the reCAPTCHAs to the white theme. If you want to further customize, you can pass options through the Form option:
+
+```php
+echo Form::captcha(array('theme' => 'blackglass'));
+```
+
+Options passed into `Form::captcha` will always supercede the configuration.
