@@ -2,6 +2,8 @@
     "name": "greggilbert/recaptcha",
     "description": "reCAPTCHA Validator for Laravel 4",
 	"keywords": ["recaptcha", "captcha", "laravel", "laravel4"],
+	"homepage": "http://github.com/greggilbert/recaptcha",
+	"license": "MIT",
     "authors": [
         {
             "name": "Greg Gilbert",
