@@ -64,11 +64,11 @@ class RecaptchaServiceProvider extends ServiceProvider
 			$configOptions = app('config')->get('recaptcha::options', array());
 			
 			$data = array(
-				'public_key'	=> $this->app['config']->get('recaptcha::public_key'),
+				'public_key'	=> app('config')->get('recaptcha::public_key'),
 				'options'		=> array_merge($configOptions, $options),
 			);
 			
-			return $this->app['view']->make('recaptcha::captcha', $data);
+			return app('view')->make('recaptcha::captcha', $data);
 		});
 	}
 	
