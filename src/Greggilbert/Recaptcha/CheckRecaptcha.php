@@ -22,7 +22,7 @@ class CheckRecaptcha
 	{
 		$parameters = $this->encode(array(
 			'privatekey'	=> app('config')->get('recaptcha::private_key'),
-			'remoteip'		=> $_SERVER['REMOTE_ADDR'],
+			'remoteip'		=> app('request')->getClientIp(),
 			'challenge'		=> $challenge,
 			'response' => $response,
 		));
