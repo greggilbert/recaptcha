@@ -34,7 +34,7 @@ Add the following line to the `require` section of `composer.json`:
 ```php
     $rules = array(
         // ...
-        'recaptcha_response_field' => 'recaptcha',
+        'recaptcha_response_field' => 'required|recaptcha',
     };
 ```
 
