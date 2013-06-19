@@ -20,7 +20,7 @@ class CheckRecaptcha
 	 */
 	public function check($challenge, $response)
 	{
-		$parameters = $this->encode(array(
+		$parameters = http_build_query(array(
 			'privatekey'	=> app('config')->get('recaptcha::private_key'),
 			'remoteip'		=> app('request')->getClientIp(),
 			'challenge'		=> $challenge,
@@ -55,21 +55,5 @@ class CheckRecaptcha
 
 		return explode("\n", $apiResponse[1]);
 	}
-	
-	/**
-	 * Encodes a set of parameters
-	 * @param array $params
-	 * @return string
-	 */
-	protected function encode($params = array())
-	{
-		$sets = array();
-		
-		foreach($params as $key => $value)
-		{
-			$sets[] = $key . '=' . urlencode(stripslashes($value));
-		}
-		
-		return implode("&", $sets);
-	}
+
 }
