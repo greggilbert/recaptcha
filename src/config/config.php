@@ -13,9 +13,4 @@ return array(
 	'public_key'	=> '',
 	'private_key'	=> '',
 	
-	/**
-	 * customized view defined here (optional)
-	 */
-	'view'		=> '',
-	
 );
