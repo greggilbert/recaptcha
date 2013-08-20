@@ -68,7 +68,12 @@ class RecaptchaServiceProvider extends ServiceProvider
 				'options'		=> array_merge($configOptions, $options),
 			);
 			
-			return app('view')->make('recaptcha::captcha', $data);
+			/**
+			 * try to get user defined view first
+			 * use default view if not defined
+			 */
+			$view = app('config')->get('recaptcha.view', 'recaptcha::captcha');
+			return app('view')->make($view, $data);
 		});
 	}
 	
