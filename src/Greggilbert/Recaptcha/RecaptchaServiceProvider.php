@@ -72,7 +72,7 @@ class RecaptchaServiceProvider extends ServiceProvider
 			 * try to get user defined view first
 			 * use default view if not defined
 			 */
-			$view = app('config')->get('recaptcha.view', 'recaptcha::captcha');
+			$view = app('config')->get('recaptcha::view', 'recaptcha::captcha');
 			return app('view')->make($view, $data);
 		});
 	}
