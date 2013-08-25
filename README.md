@@ -59,4 +59,18 @@ would default all the reCAPTCHAs to the white theme. If you want to further cust
 echo Form::captcha(array('theme' => 'blackglass'));
 ```
 
+Alternatively, if you want to set a default template instead of the standard one, you can use the config:
+
+```php
+    // ...
+    'template' => 'customCaptcha',
+```
+
+or you can pass it in through the Form option:
+
+```php
+echo Form::captcha(array('template' => 'customCaptcha'));
+```
+
+
 Options passed into `Form::captcha` will always supercede the configuration.
