@@ -39,7 +39,7 @@ class CheckRecaptcha
 		
 		if (false == ($fs = @fsockopen(self::VERIFY_SERVER, 80)))
 		{
-			throw new Exception('Could not open socket');
+			throw new \Exception('Could not open socket');
 		}
 
 		fwrite($fs, $http_request);
