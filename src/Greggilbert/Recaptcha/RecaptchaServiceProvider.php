@@ -63,10 +63,17 @@ class RecaptchaServiceProvider extends ServiceProvider
 		{
 			$configOptions = app('config')->get('recaptcha::options', array());
 			
+			$mergedOptions = array_merge($configOptions, $options);
+			
 			$data = array(
 				'public_key'	=> app('config')->get('recaptcha::public_key'),
-				'options'		=> array_merge($configOptions, $options),
+				'options'		=> $mergedOptions,
 			);
+			
+			if(array_key_exists('lang', $mergedOptions) && "" != trim($mergedOptions['lang']))
+			{
+				$data['lang'] = $mergedOptions['lang'];
+			}
 			
 			$view = 'recaptcha::captcha';
 			

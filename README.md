@@ -72,5 +72,14 @@ or you can pass it in through the Form option:
 echo Form::captcha(array('template' => 'customCaptcha'));
 ```
 
-
 Options passed into `Form::captcha` will always supercede the configuration.
+
+To change the language of the captcha, simply pass in a language as part of the options:
+
+```php
+    'options' => array(
+        'lang' => 'fr',
+	),
+```
+
+You can do this both in the config and through the `Form::captcha()` call.
