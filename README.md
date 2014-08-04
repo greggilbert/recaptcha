@@ -83,3 +83,8 @@ To change the language of the captcha, simply pass in a language as part of the 
 ```
 
 You can do this both in the config and through the `Form::captcha()` call.
+
+## Limitation
+
+Because of Google's way of displaying the recaptcha, this package won't work if you load your form from an ajax call.
+If you need to do it you should use [that method provided by Google]('https://developers.google.com/recaptcha/docs/display?csw=1') : 
