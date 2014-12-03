@@ -52,6 +52,8 @@ class CheckRecaptcha
 		
 		$apiResponse = explode("\r\n\r\n", $apiResponse, 2);
 
+		var_dump($apiResponse);
+
 		return explode("\n", $apiResponse[1]);
 	}
 
