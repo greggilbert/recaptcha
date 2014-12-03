@@ -9,7 +9,7 @@ class CheckRecaptcha
 {
     const SERVER		= 'http://www.google.com/recaptcha/api';
     const SERVER_SECURE	= 'https://www.google.com/recaptcha/api';
-	const ENDPOINT		= '/recaptcha/api/verify';
+	const ENDPOINT		= '/recaptcha/api/siteverify';
     const VERIFY_SERVER	= 'www.google.com';
 	
 	/**
