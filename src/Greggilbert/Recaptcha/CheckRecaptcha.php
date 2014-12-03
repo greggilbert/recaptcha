@@ -28,6 +28,8 @@ class CheckRecaptcha
 			'response' => $response,
 		));
 		
+		var_dump($parameters);
+		
 		$curl = curl_init("https://www.google.com/recaptcha/api/siteverify?" . http_build_query($parameters));
 		curl_setopt($curl, CURLOPT_HEADER, false);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
