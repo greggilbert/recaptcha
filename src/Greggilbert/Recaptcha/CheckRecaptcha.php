@@ -9,7 +9,8 @@ class CheckRecaptcha
 {
     const SERVER		= 'http://www.google.com/recaptcha/api';
     const SERVER_SECURE	= 'https://www.google.com/recaptcha/api';
-	const ENDPOINT		= '/recaptcha/api/siteverify';
+    const ENDPOINT		= '/recaptcha/api/verify';
+	const ENDPOINTV2	= '/recaptcha/api/siteverify';
     const VERIFY_SERVER	= 'www.google.com';
 	
 	/**
@@ -27,13 +28,11 @@ class CheckRecaptcha
 			'response' => $response,
 		));
 
-		$http_request  = "POST " . self::ENDPOINT . " HTTP/1.0\r\n";
+		$http_request  = "GET" . self::ENDPOINT . "?" . $parameters . " HTTP/1.0\r\n";
 		$http_request .= "Host: " . self::VERIFY_SERVER . "\r\n";
 		$http_request .= "Content-Type: application/x-www-form-urlencoded;\r\n";
-		$http_request .= "Content-Length: " . strlen($parameters) . "\r\n";
 		$http_request .= "User-Agent: reCAPTCHA/PHP\r\n";
 		$http_request .= "\r\n";
-		$http_request .= $parameters;
 
 		$apiResponse = '';
 		
