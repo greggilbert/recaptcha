@@ -47,13 +47,8 @@ class RecaptchaServiceProvider extends ServiceProvider
 				$challenge = app('Input')->get('recaptcha_challenge_field');
 			}
 			
-			$captcha = new CheckRecaptcha;
-			list($passed, $response) = $captcha->check($challenge, $value);
-			
-			if('true' == trim($passed))
-				return true;
-			
-			return false;
+			$captcha = new CheckRecaptchaV2;
+			return $captcha->check($challenge, $value);
 		});
 	}
 	
