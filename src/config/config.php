@@ -31,6 +31,6 @@ return array(
 	| Use the no-CAPTCHA RECAPTCHA API
 	|	
 	*/	
-	'v2' => true
+	'v2' => true,
 
 );

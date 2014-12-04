@@ -53,7 +53,12 @@ class CheckRecaptcha
 		
 		$apiResponse = explode("\r\n\r\n", $apiResponse, 2);
 
-		return explode("\n", $apiResponse[1]);
+		
+		$apiResponse = explode("\r\n\r\n", $apiResponse, 2);
+
+        list($passed, $response) = explode("\n", $apiResponse[1]);
+
+        return ('true' == trim($passed));
 	}
 
 }
