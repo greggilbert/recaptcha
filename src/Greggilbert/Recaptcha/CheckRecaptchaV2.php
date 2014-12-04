@@ -5,7 +5,7 @@ namespace Greggilbert\Recaptcha;
 /**
  * Handle sending out and receiving a response to validate the captcha
  */
-class CheckRecaptcha
+class CheckRecaptchaV2
 {
 
 	/**
