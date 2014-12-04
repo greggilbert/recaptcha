@@ -47,7 +47,11 @@ class RecaptchaServiceProvider extends ServiceProvider
 				$challenge = app('Input')->get('recaptcha_challenge_field');
 			}
 			
-			$captcha = new CheckRecaptchaV2;
+			// Select the check class based on the v2 setting
+			$captcha = new CheckRecaptcha;				
+			if(app('config')->get('recaptcha::v2')){
+				$captcha = new CheckRecaptchaV2;
+			}
 			return $captcha->check($challenge, $value);
 		});
 	}
@@ -73,7 +77,10 @@ class RecaptchaServiceProvider extends ServiceProvider
 				$data['lang'] = $mergedOptions['lang'];
 			}
 			
-			$view = 'recaptcha::captchav2';
+			$view = 'recaptcha::captcha';
+			if(app('config')->get('recaptcha::v2')){
+				$view = 'recaptcha::captchav2';
+			}
 			
 			$configTemplate = app('config')->get('recaptcha::template', '');
 			
