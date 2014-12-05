@@ -42,15 +42,17 @@ class RecaptchaServiceProvider extends ServiceProvider
 		
 		$validator::extend('recaptcha', function($attribute, $value, $parameters)
 		{
-			$challenge = app('Input')->get('recaptcha_challenge_field');
+			$challenge = app('Input')->get('g-recaptcha-response');
+			if($challenge == null){
+				$challenge = app('Input')->get('recaptcha_challenge_field');
+			}
 			
-			$captcha = new CheckRecaptcha;
-			list($passed, $response) = $captcha->check($challenge, $value);
-			
-			if('true' == trim($passed))
-				return true;
-			
-			return false;
+			// Select the check class based on the v2 setting
+			$captcha = new CheckRecaptcha;				
+			if(app('config')->get('recaptcha::v2')){
+				$captcha = new CheckRecaptchaV2;
+			}
+			return $captcha->check($challenge, $value);
 		});
 	}
 	
@@ -76,6 +78,9 @@ class RecaptchaServiceProvider extends ServiceProvider
 			}
 			
 			$view = 'recaptcha::captcha';
+			if(app('config')->get('recaptcha::v2')){
+				$view = 'recaptcha::captchav2';
+			}
 			
 			$configTemplate = app('config')->get('recaptcha::template', '');
 			

@@ -84,6 +84,26 @@ To change the language of the captcha, simply pass in a language as part of the 
 
 You can do this both in the config and through the `Form::captcha()` call.
 
+## V2 (No CAPTCHA reCAPTCHA) Support
+
+To make use of the new reCAPTCHA (see https://developers.google.com/recaptcha/docs/display), you will need to enable the v2 setting in the config:
+
+```php
+    // ...
+    'v2' => true,
+```
+
+Note that you will also have to generate a new set of keys if you have previously used reCAPTCHA v1. You can request keys at: https://www.google.com/recaptcha/admin#list
+
+The validation rules will also need to be modified to the below:
+
+```php
+    $rules = array(
+        // ...
+        'g-recaptcha-response' => 'required|recaptcha',
+    };
+```
+
 ## Limitation
 
 Because of Google's way of displaying the recaptcha, this package won't work if you load your form from an ajax call.
