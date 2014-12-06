@@ -20,6 +20,8 @@ Add the following line to the `require` section of `composer.json`:
 1. Add `Greggilbert\Recaptcha\RecaptchaServiceProvider` to the service provider list in `app/config/app.php`.
 2. Run `php artisan config:publish greggilbert/recaptcha`.
 3. In `app/config/packages/greggilbert/recaptcha/config.php`, enter your reCAPTCHA public and private keys.
+  * If you are not using the most recent version of reCAPTCHA, set `version` to 1. 
+  * If you are upgrading to v2 of reCAPTCHA, note that your keys from the previous version will not work, and you need to generate a new set in [the reCAPTCHA admin](https://www.google.com/recaptcha/admin).
 4. Add the following line into `app/lang/[lang]/validation.php`:
 
 ```php
@@ -28,6 +30,18 @@ Add the following line to the `require` section of `composer.json`:
 
 ## Usage
 
+### v2 (No Captcha)
+1. In your form, use `Form::captcha()` to echo out the markup.
+2. In your validation rules, add the following:
+
+```php
+    $rules = array(
+        // ...
+        'g-recaptcha-response' => 'required|recaptcha',
+    };
+```
+
+### v1 (Legacy)
 1. In your form, use `Form::captcha()` to echo out the markup.
 2. In your validation rules, add the following:
 
@@ -84,27 +98,7 @@ To change the language of the captcha, simply pass in a language as part of the 
 
 You can do this both in the config and through the `Form::captcha()` call.
 
-## V2 (No CAPTCHA reCAPTCHA) Support
-
-To make use of the new reCAPTCHA (see https://developers.google.com/recaptcha/docs/display), you will need to enable the v2 setting in the config:
-
-```php
-    // ...
-    'v2' => true,
-```
-
-Note that you will also have to generate a new set of keys if you have previously used reCAPTCHA v1. You can request keys at: https://www.google.com/recaptcha/admin#list
-
-The validation rules will also need to be modified to the below:
-
-```php
-    $rules = array(
-        // ...
-        'g-recaptcha-response' => 'required|recaptcha',
-    };
-```
-
 ## Limitation
 
-Because of Google's way of displaying the recaptcha, this package won't work if you load your form from an ajax call.
-If you need to do it you should use [that method provided by Google]('https://developers.google.com/recaptcha/docs/display?csw=1') : 
+Because of Google's way of displaying the reCAPTCHA, this package won't work if you load your form from an ajaxAJAX call.
+If you need to do it, you should use one of [the alternate methods provided by Google](https://developers.google.com/recaptcha/docs/display?csw=1).
