@@ -1,7 +1,6 @@
 <?php namespace Greggilbert\Recaptcha;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Validation\Factory;
 
 /**
  * Service provider for the Recaptcha class
@@ -33,8 +32,6 @@ class RecaptchaServiceProvider extends ServiceProvider
 		$this->addFormMacro();
 	}
     
-    
-	
 	/**
 	 * Extends Validator to include a recaptcha type
 	 */
@@ -108,7 +105,7 @@ class RecaptchaServiceProvider extends ServiceProvider
 	{
         $this->app->bind('Greggilbert\Recaptcha\CaptchaInterface', function()
         {
-            if($this->app['config']->get('recaptcha::v2', false))
+            if($this->app['config']->get('recaptcha::version', false) === 2 || $this->app['config']->get('recaptcha::v2', false))
             {
                 return new CheckRecaptchaV2;
             }

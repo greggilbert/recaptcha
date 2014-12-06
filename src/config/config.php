@@ -25,12 +25,12 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
-	| v2
+	| Version
 	|--------------------------------------------------------------------------
 	|
-	| Use the no-CAPTCHA RECAPTCHA API
+	| Set which version of ReCaptcha to use.
 	|	
 	*/	
-	'v2' => true,
+	'version' => 2,
 
 );
