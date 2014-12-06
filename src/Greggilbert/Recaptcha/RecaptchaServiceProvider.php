@@ -44,7 +44,6 @@ class RecaptchaServiceProvider extends ServiceProvider
 			$captcha = app('Greggilbert\Recaptcha\CaptchaInterface');
             $challenge = app('Input')->get($captcha->getResponseKey());
             
-			// Select the check class based on the v2 setting
 			return $captcha->check($challenge, $value);
 		});
 	}

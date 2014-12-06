@@ -12,7 +12,7 @@ class CheckRecaptchaV2 implements RecaptchaInterface
 	 * Call out to reCAPTCHA and process the response
 	 * @param string $challenge
 	 * @param string $response
-	 * @return array(bool, string)
+	 * @return bool
 	 */
 	public function check($challenge, $response)
 	{
