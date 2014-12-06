@@ -51,7 +51,7 @@ class RecaptchaServiceProvider extends ServiceProvider
 			}
             
 			// Select the check class based on the v2 setting
-			$captcha = app('CaptchaInterface');
+			$captcha = app('Greggilbert\Recaptcha\CaptchaInterface');
 			return $captcha->check($challenge, $value);
 		});
 	}
@@ -106,7 +106,7 @@ class RecaptchaServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-        $this->app->bind('CaptchaInterface', function()
+        $this->app->bind('Greggilbert\Recaptcha\CaptchaInterface', function()
         {
             if($this->app['config']->get('recaptcha::v2', false))
             {

@@ -5,7 +5,7 @@ namespace Greggilbert\Recaptcha;
 /**
  * Handle sending out and receiving a response to validate the captcha
  */
-class CheckRecaptcha
+class CheckRecaptcha implements RecaptchaInterface
 {
     const SERVER		= 'http://www.google.com/recaptcha/api';
     const SERVER_SECURE	= 'https://www.google.com/recaptcha/api';
@@ -24,7 +24,7 @@ class CheckRecaptcha
 			'privatekey'	=> app('config')->get('recaptcha::private_key'),
 			'remoteip'		=> app('request')->getClientIp(),
 			'challenge'		=> $challenge,
-			'response' => $response,
+			'response'      => $response,
 		));
 
 		$http_request  = "POST " . self::ENDPOINT . " HTTP/1.0\r\n";
