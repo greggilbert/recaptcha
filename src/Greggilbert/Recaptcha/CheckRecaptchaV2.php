@@ -23,13 +23,17 @@ class CheckRecaptchaV2
 			'response' => $response,
 		));
 
-		$curl = curl_init("https://www.google.com/recaptcha/api/siteverify?" . $parameters); // . http_build_query($parameters));
-		curl_setopt($curl, CURLOPT_HEADER, false);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_TIMEOUT, 1);
+		if (!app('config')->get('recaptcha::config.no_curl', false)) {
+            $curl = curl_init("https://www.google.com/recaptcha/api/siteverify?" . $parameters); // . http_build_query($parameters));
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 1);
+            $googleresponse = curl_exec($curl);
+        } else {
+            $googleresponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?'.$parameters);
+        }
 		
-		$response = curl_exec($curl);
-        $responseArr = json_decode($response,true);
+        $responseArr = json_decode($googleresponse,true);
 		return $responseArr['success'];
 	}
 

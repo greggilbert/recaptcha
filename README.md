@@ -104,6 +104,15 @@ The validation rules will also need to be modified to the below:
     };
 ```
 
+## For non-curl Support
+
+If you dont want to use curl, you can set the no_curl option in the config:
+
+```php
+    // ...
+    'no_curl' => true,
+```
+
 ## Limitation
 
 Because of Google's way of displaying the recaptcha, this package won't work if you load your form from an ajax call.
