@@ -53,7 +53,7 @@ class CheckRecaptcha implements RecaptchaInterface
 		
 		$apiResponse = explode("\r\n\r\n", $apiResponse, 2);
 
-        list($passed, $response) = explode("\n", $apiResponse[1]);
+        list($passed, $responseText) = explode("\n", $apiResponse[1]);
 
         return ('true' === trim($passed));
 	}
@@ -62,5 +62,9 @@ class CheckRecaptcha implements RecaptchaInterface
     {
         return 'captcha';
     }
-
+    
+    public function getResponseKey()
+    {
+        return 'recaptcha_challenge_field';
+    }
 }

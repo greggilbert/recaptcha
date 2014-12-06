@@ -15,6 +15,13 @@ interface RecaptchaInterface
     /**
      * Return template to render for reCAPTCHA
      * Note that this will be prepended with recaptcha::
+     * @return string
      */
     public function getTemplate();
+    
+    /**
+     * Return response key as specified in view.
+     * @return string
+     */
+    public function getResponseKey();
 }

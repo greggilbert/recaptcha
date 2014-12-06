@@ -17,24 +17,30 @@ class CheckRecaptchaV2 implements RecaptchaInterface
 	public function check($challenge, $response)
 	{
 		$parameters = http_build_query(array(
-			'secret'	=> app('config')->get('recaptcha::config.private_key'),
+			'secret'        => app('config')->get('recaptcha::config.private_key'),
 			'remoteip'		=> app('request')->getClientIp(),
-			'challenge'		=> $challenge,
-			'response' => $response,
+			'response'      => $response,
 		));
-
-		$curl = curl_init("https://www.google.com/recaptcha/api/siteverify?" . $parameters); // . http_build_query($parameters));
+        
+		$curl = curl_init('https://www.google.com/recaptcha/api/siteverify?' . $parameters);
 		curl_setopt($curl, CURLOPT_HEADER, false);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 		
-		$response = curl_exec($curl);
-        $responseArr = json_decode($response,true);
-		return $responseArr['success'];
+		$curlResponse = curl_exec($curl);
+        $decodedResponse = json_decode($curlResponse, true);
+        
+		return $decodedResponse['success'];
 	}
 
     public function getTemplate()
     {
         return 'captchav2';
+    }
+    
+    public function getResponseKey()
+    {
+        return 'g-recaptcha-response';
     }
 }

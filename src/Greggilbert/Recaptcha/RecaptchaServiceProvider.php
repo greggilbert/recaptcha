@@ -41,14 +41,10 @@ class RecaptchaServiceProvider extends ServiceProvider
 		
 		$validator::extend('recaptcha', function($attribute, $value, $parameters)
 		{
-			$challenge = app('Input')->get('g-recaptcha-response');
-			if($challenge == null)
-            {
-				$challenge = app('Input')->get('recaptcha_challenge_field');
-			}
+			$captcha = app('Greggilbert\Recaptcha\CaptchaInterface');
+            $challenge = app('Input')->get($captcha->getResponseKey());
             
 			// Select the check class based on the v2 setting
-			$captcha = app('Greggilbert\Recaptcha\CaptchaInterface');
 			return $captcha->check($challenge, $value);
 		});
 	}
