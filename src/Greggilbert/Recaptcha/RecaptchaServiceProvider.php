@@ -32,6 +32,8 @@ class RecaptchaServiceProvider extends ServiceProvider
 		$this->addValidator();
 		$this->addFormMacro();
 	}
+    
+    
 	
 	/**
 	 * Extends Validator to include a recaptcha type
@@ -43,15 +45,13 @@ class RecaptchaServiceProvider extends ServiceProvider
 		$validator::extend('recaptcha', function($attribute, $value, $parameters)
 		{
 			$challenge = app('Input')->get('g-recaptcha-response');
-			if($challenge == null){
+			if($challenge == null)
+            {
 				$challenge = app('Input')->get('recaptcha_challenge_field');
 			}
-			
+            
 			// Select the check class based on the v2 setting
-			$captcha = new CheckRecaptcha;				
-			if(app('config')->get('recaptcha::v2')){
-				$captcha = new CheckRecaptchaV2;
-			}
+			$captcha = app('CaptchaInterface');
 			return $captcha->check($challenge, $value);
 		});
 	}
@@ -78,7 +78,8 @@ class RecaptchaServiceProvider extends ServiceProvider
 			}
 			
 			$view = 'recaptcha::captcha';
-			if(app('config')->get('recaptcha::v2')){
+			if(app('config')->get('recaptcha::v2'))
+            {
 				$view = 'recaptcha::captchav2';
 			}
 			
@@ -105,6 +106,15 @@ class RecaptchaServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
+        $this->app->bind('CaptchaInterface', function()
+        {
+            if($this->app['config']->get('recaptcha::v2', false))
+            {
+                return new CheckRecaptchaV2;
+            }
+            
+            return new CheckRecaptcha;
+        });
 	}
 
 	/**
