@@ -69,17 +69,13 @@ class RecaptchaServiceProvider extends ServiceProvider
 				'options'		=> $mergedOptions,
 			);
 			
-			if(array_key_exists('lang', $mergedOptions) && "" != trim($mergedOptions['lang']))
+			if(array_key_exists('lang', $mergedOptions) && "" !== trim($mergedOptions['lang']))
 			{
 				$data['lang'] = $mergedOptions['lang'];
 			}
 			
-			$view = 'recaptcha::captcha';
-			if(app('config')->get('recaptcha::v2'))
-            {
-				$view = 'recaptcha::captchav2';
-			}
-			
+            $view = 'recaptcha::' . app('Greggilbert\Recaptcha\CaptchaInterface')->getTemplate();
+            
 			$configTemplate = app('config')->get('recaptcha::template', '');
 			
 			if(array_key_exists('template', $options))

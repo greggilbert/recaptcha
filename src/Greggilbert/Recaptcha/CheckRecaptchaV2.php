@@ -33,4 +33,8 @@ class CheckRecaptchaV2 implements RecaptchaInterface
 		return $responseArr['success'];
 	}
 
+    public function getTemplate()
+    {
+        return 'captchav2';
+    }
 }

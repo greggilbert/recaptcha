@@ -11,4 +11,10 @@ interface RecaptchaInterface
 	 * @return array(bool, string)
 	 */
 	public function check($challenge, $response);
+    
+    /**
+     * Return template to render for reCAPTCHA
+     * Note that this will be prepended with recaptcha::
+     */
+    public function getTemplate();
 }

@@ -55,7 +55,12 @@ class CheckRecaptcha implements RecaptchaInterface
 
         list($passed, $response) = explode("\n", $apiResponse[1]);
 
-        return ('true' == trim($passed));
+        return ('true' === trim($passed));
 	}
+    
+    public function getTemplate()
+    {
+        return 'captcha';
+    }
 
 }

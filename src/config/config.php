@@ -31,6 +31,6 @@ return array(
 	| Set which version of ReCaptcha to use.
 	|	
 	*/	
-	'version' => 2,
+	'version'   	=> 2,
 
 );
