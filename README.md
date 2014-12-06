@@ -40,6 +40,14 @@ Add the following line to the `require` section of `composer.json`:
 
 It's also recommended to add `required` when validating.
 
+According to the latest changes in Google recaptcha you can use also for the validation:
+```php
+    $rules = array(
+        // ...
+        'g-recaptcha-response' => 'required|recaptcha',
+    };
+```
+
 ## Customization
 
 reCAPTCHA allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/customization). You can configure the output of the captcha in several ways.
