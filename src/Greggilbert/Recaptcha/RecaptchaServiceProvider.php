@@ -96,7 +96,7 @@ class RecaptchaServiceProvider extends ServiceProvider
 	{
         $this->app->bind('Greggilbert\Recaptcha\CaptchaInterface', function()
         {
-            if($this->app['config']->get('recaptcha::version', false) === 2 || $this->app['config']->get('recaptcha::v2', false))
+            if(app('config')->get('recaptcha::version', false) === 2 || app('config')->get('recaptcha::v2', false))
             {
                 return new CheckRecaptchaV2;
             }
