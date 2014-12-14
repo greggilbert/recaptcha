@@ -22,15 +22,31 @@ class CheckRecaptchaV2 implements RecaptchaInterface
 			'response'      => $response,
 		));
         
-		$curl = curl_init('https://www.google.com/recaptcha/api/siteverify?' . $parameters);
-		curl_setopt($curl, CURLOPT_HEADER, false);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_TIMEOUT, 1);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-		
-		$curlResponse = curl_exec($curl);
-        $decodedResponse = json_decode($curlResponse, true);
+        $url = 'https://www.google.com/recaptcha/api/siteverify?' . $parameters;
+        $checkResponse = null;
         
+        // prefer curl, but fall back to file_get_contents
+        if(function_exists('curl_version'))
+        {
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 1);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+            $checkResponse = curl_exec($curl);
+        }
+        else
+        {
+            $checkResponse = file_get_contents($url);
+        }
+        
+        if(is_null($checkResponse) || empty($checkResponse))
+        {
+            return false;
+        }
+        
+        $decodedResponse = json_decode($checkResponse, true);
 		return $decodedResponse['success'];
 	}
 
