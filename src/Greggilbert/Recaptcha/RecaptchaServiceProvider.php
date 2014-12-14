@@ -41,7 +41,7 @@ class RecaptchaServiceProvider extends ServiceProvider
 		
 		$validator::extend('recaptcha', function($attribute, $value, $parameters)
 		{
-			$captcha = app('Greggilbert\Recaptcha\CaptchaInterface');
+			$captcha = app('Greggilbert\Recaptcha\RecaptchaInterface');
             $challenge = app('Input')->get($captcha->getResponseKey());
             
 			return $captcha->check($challenge, $value);
@@ -69,7 +69,7 @@ class RecaptchaServiceProvider extends ServiceProvider
 				$data['lang'] = $mergedOptions['lang'];
 			}
 			
-            $view = 'recaptcha::' . app('Greggilbert\Recaptcha\CaptchaInterface')->getTemplate();
+            $view = 'recaptcha::' . app('Greggilbert\Recaptcha\RecaptchaInterface')->getTemplate();
             
 			$configTemplate = app('config')->get('recaptcha::template', '');
 			
@@ -94,7 +94,7 @@ class RecaptchaServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-        $this->app->bind('Greggilbert\Recaptcha\CaptchaInterface', function()
+        $this->app->bind('Greggilbert\Recaptcha\RecaptchaInterface', function()
         {
             if(app('config')->get('recaptcha::version', false) === 2 || app('config')->get('recaptcha::v2', false))
             {
