@@ -26,7 +26,7 @@ class CheckRecaptchaV2 implements RecaptchaInterface
         $checkResponse = null;
         
         // prefer curl, but fall back to file_get_contents
-        if(function_exists('curl_version'))
+        if('curl' === app('config')->get('recaptcha::config.driver') && function_exists('curl_version'))
         {
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_HEADER, false);
