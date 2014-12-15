@@ -8,9 +8,9 @@ return array(
 	|--------------------------------------------------------------------------
 	|
 	| Set the public and private API keys as provided by reCAPTCHA.
-    |
-    | In version 2 of reCAPTCHA, public_key is the Site key,
-    | and private_key is the Secret key.
+	|
+	| In version 2 of reCAPTCHA, public_key is the Site key,
+	| and private_key is the Secret key.
 	|
 	*/
 	'public_key'	=> '',
@@ -32,11 +32,25 @@ return array(
 	|--------------------------------------------------------------------------
 	|
 	| Determine how to call out to get response; values are 'curl' or 'native'.
-    | Only applies to v2.
+	| Only applies to v2.
 	|	
 	*/	
 	'driver'   	=> 'curl',
-    
+
+	/*
+	|--------------------------------------------------------------------------
+	| Options
+	|--------------------------------------------------------------------------
+	|
+	| Various options for the driver
+	|	
+	*/	
+	'options'   	=> array(
+		
+		'curl_timeout' => 1,
+		
+	),
+
 	/*
 	|--------------------------------------------------------------------------
 	| Version

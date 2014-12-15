@@ -31,7 +31,7 @@ class CheckRecaptchaV2 implements RecaptchaInterface
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_HEADER, false);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_TIMEOUT, 1);
+            curl_setopt($curl, CURLOPT_TIMEOUT, app('config')->get('recaptcha::config.options.curl_timeout', 1));
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
             $checkResponse = curl_exec($curl);
