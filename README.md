@@ -54,6 +54,45 @@ Add the following line to the `require` section of `composer.json`:
 
 It's also recommended to add `required` when validating.
 
+### How to show error message in view ?
+
+Add this code in fails section.
+
+```
+return Redirect::to('/your/route/here')->withErrors($validationvariablehere);
+```
+
+Like this example.
+
+```
+<?php
+class UsersController extends \BaseController {
+	public function handleRegister(){
+		$data = Input::all();
+		$rules = array(
+			'g-recaptcha-response' => 'required|recaptcha',
+		);
+		$validator = Validation::make($data,$rules);
+		if ($validator->passes()){
+			// success code here
+		}else{
+			return Redirect::to('/your/route/here')->withErrors($validator);
+		}
+	}
+}
+?>
+```
+
+Add this code in view.
+
+```
+{{ Form::captcha() }}
+@if ($errors->has('g-recaptcha-response')) <small class="error"> The captcha field is required and make sure captcha is correct. </small> @endif
+```
+
+In the above tutorial i use zurb foundation, so i use `<small class="error"> your error text here </small>`.
+Please make sure `$errors->has('g-recaptcha-response)`
+
 ## Customization
 
 reCAPTCHA allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/customization). You can configure the output of the captcha in several ways.
