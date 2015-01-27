@@ -19,7 +19,7 @@
             "src/migrations"
         ],
         "psr-4": {
-            "Greggilbert\\Recaptcha": "src/"
+            "Greggilbert\\Recaptcha\\": "src/"
         }
     },
     "extra": {
