@@ -1,7 +1,9 @@
 Recaptcha
 =========
 
-A reCAPTCHA Validator for Laravel 4.
+A reCAPTCHA Validator for Laravel 5.
+
+# Currently in development. Use 1.x for Laravel 4.
 
 ## Installation
 
