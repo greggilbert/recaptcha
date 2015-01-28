@@ -1,6 +1,6 @@
 <?php
 
-namespace Greggilbert\Recaptcha;
+namespace Greggilbert\Recaptcha\Service;
 
 /**
  * Handle sending out and receiving a response to validate the captcha
@@ -8,19 +8,19 @@ namespace Greggilbert\Recaptcha;
 class CheckRecaptchaV2 implements RecaptchaInterface
 {
 
-	/**
-	 * Call out to reCAPTCHA and process the response
-	 * @param string $challenge
-	 * @param string $response
-	 * @return bool
-	 */
-	public function check($challenge, $response)
-	{
-		$parameters = http_build_query(array(
-			'secret'        => app('config')->get('recaptcha::config.private_key'),
-			'remoteip'		=> app('request')->getClientIp(),
-			'response'      => $response,
-		));
+    /**
+     * Call out to reCAPTCHA and process the response
+     * @param string $challenge
+     * @param string $response
+     * @return bool
+     */
+    public function check($challenge, $response)
+    {
+        $parameters = http_build_query(array(
+            'secret'    => app('config')->get('recaptcha::config.private_key'),
+            'remoteip'  => app('request')->getClientIp(),
+            'response'  => $response,
+        ));
         
         $url = 'https://www.google.com/recaptcha/api/siteverify?' . $parameters;
         $checkResponse = null;
@@ -47,8 +47,8 @@ class CheckRecaptchaV2 implements RecaptchaInterface
         }
         
         $decodedResponse = json_decode($checkResponse, true);
-		return $decodedResponse['success'];
-	}
+        return $decodedResponse['success'];
+    }
 
     public function getTemplate()
     {
