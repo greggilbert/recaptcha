@@ -27,6 +27,8 @@ class RecaptchaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->addValidator();
+        
+        $this->loadViewsFrom('recaptcha', __DIR__ . '/views');
     }
     
     /**
@@ -38,7 +40,7 @@ class RecaptchaServiceProvider extends ServiceProvider
         
         $validator::extend('recaptcha', function($attribute, $value, $parameters)
         {
-            $captcha = app('Greggilbert\Recaptcha\Service\RecaptchaInterface');
+            $captcha = app('recaptcha.service');
             $challenge = app('Input')->get($captcha->getResponseKey());
             
             return $captcha->check($challenge, $value);
@@ -58,8 +60,7 @@ class RecaptchaServiceProvider extends ServiceProvider
     
     protected function bindRecaptcha()
     {
-        
-        $this->app->bind('recaptcha', function()
+        $this->app->bind('recaptcha.service', function()
         {
             if(app('config')->get('recaptcha.version', false) === 2 || app('config')->get('recaptcha.v2', false))
             {
@@ -67,6 +68,14 @@ class RecaptchaServiceProvider extends ServiceProvider
             }
             
             return new Service\CheckRecaptcha;
+        });
+        
+        $this->app->bind('recaptcha', function()
+        {
+            return new Recaptcha(
+                        $this->app->make('recaptcha.service'), 
+                        app('config')->get('recaptcha')
+            );
         });
         
     }
@@ -93,45 +102,4 @@ class RecaptchaServiceProvider extends ServiceProvider
         ];
     }
     
-    
-    /**
-     * Extends Form to include a recaptcha macro
-     */
-    public function addFormMacro()
-    {
-        // @FIXME - Form no longer included in L5
-        app('form')->macro('captcha', function($options = array())
-        {
-            $configOptions = app('config')->get('recaptcha::options', array());
-            
-            $mergedOptions = array_merge($configOptions, $options);
-            
-            $data = array(
-                'public_key'    => app('config')->get('recaptcha::public_key'),
-                'options'        => $mergedOptions,
-            );
-            
-            if(array_key_exists('lang', $mergedOptions) && "" !== trim($mergedOptions['lang']))
-            {
-                $data['lang'] = $mergedOptions['lang'];
-            }
-            
-            $view = 'recaptcha::' . app('Greggilbert\Recaptcha\Service\RecaptchaInterface')->getTemplate();
-            
-            $configTemplate = app('config')->get('recaptcha::template', '');
-            
-            if(array_key_exists('template', $options))
-            {
-                $view = $options['template'];
-            }
-            elseif("" !== trim($configTemplate))
-            {
-                $view = $configTemplate;
-            }
-                        
-            return app('view')->make($view, $data);
-        });
-    }
-    
-
 }
