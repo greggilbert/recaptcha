@@ -3,7 +3,7 @@ Recaptcha
 
 A reCAPTCHA Validator for Laravel 5.
 
-# Currently in development. Use 1.x for Laravel 4.
+# Currently in beta. Use 1.x for Laravel 4.
 
 ## Installation
 
@@ -17,11 +17,18 @@ Add the following line to the `require` section of `composer.json`:
 }
 ```
 
-## Laravel 4 Setup
+## Laravel 5 Setup
 
-1. Add `Greggilbert\Recaptcha\RecaptchaServiceProvider` to the service provider list in `app/config/app.php`.
-2. Run `php artisan config:publish greggilbert/recaptcha`.
-3. In `app/config/packages/greggilbert/recaptcha/config.php`, enter your reCAPTCHA public and private keys.
+1. In `/config/app.php`, add the following to `providers`:
+```
+Greggilbert\Recaptcha\RecaptchaServiceProvider,
+```
+and the following to `aliases`:
+```
+'Recaptcha' => 'Greggilbert\Recaptcha\Facades\Recaptcha',
+```
+2. Run `php artisan vendor:publish`.
+3. In `/config/recaptcha.php`, enter your reCAPTCHA public and private keys.
   * If you are not using the most recent version of reCAPTCHA, set `version` to 1. 
   * If you are upgrading to v2 of reCAPTCHA, note that your keys from the previous version will not work, and you need to generate a new set in [the reCAPTCHA admin](https://www.google.com/recaptcha/admin).
 4. Add the following line into `app/lang/[lang]/validation.php`:
@@ -33,7 +40,7 @@ Add the following line to the `require` section of `composer.json`:
 ## Usage
 
 ### v2 (No Captcha)
-1. In your form, use `Form::captcha()` to echo out the markup.
+1. In your form, use `{{ Recaptcha::render() }}` to echo out the markup.
 2. In your validation rules, add the following:
 
 ```php
@@ -44,7 +51,7 @@ Add the following line to the `require` section of `composer.json`:
 ```
 
 ### v1 (Legacy)
-1. In your form, use `Form::captcha()` to echo out the markup.
+1. In your form, use `{{ Recaptcha::render() }}` to echo out the markup.
 2. In your validation rules, add the following:
 
 ```php
@@ -60,7 +67,7 @@ It's also recommended to add `required` when validating.
 
 reCAPTCHA allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/customization). You can configure the output of the captcha in several ways.
 
-In the `config.php`, you can create an `options` array to set the default behavior. For example:
+In the config file, you can create an `options` array to set the default behavior. For example:
 
 ```php
     // ...
@@ -69,10 +76,10 @@ In the `config.php`, you can create an `options` array to set the default behavi
 	),
 ```
 
-would default all the reCAPTCHAs to the white theme. If you want to further customize, you can pass options through the Form option:
+would default all the reCAPTCHAs to the white theme. If you want to further customize, you can pass options through the render option:
 
 ```php
-echo Form::captcha(array('theme' => 'blackglass'));
+echo Recaptcha::render(array('theme' => 'blackglass'));
 ```
 
 Alternatively, if you want to set a default template instead of the standard one, you can use the config:
@@ -85,10 +92,10 @@ Alternatively, if you want to set a default template instead of the standard one
 or you can pass it in through the Form option:
 
 ```php
-echo Form::captcha(array('template' => 'customCaptcha'));
+echo Recaptcha::render(array('template' => 'customCaptcha'));
 ```
 
-Options passed into `Form::captcha` will always supercede the configuration.
+Options passed into `Recaptcha::render` will always supercede the configuration.
 
 To change the language of the captcha, simply pass in a language as part of the options:
 
@@ -98,7 +105,7 @@ To change the language of the captcha, simply pass in a language as part of the 
 	),
 ```
 
-You can do this both in the config and through the `Form::captcha()` call.
+You can do this both in the config and through the `Recaptcha::render()` call.
 
 ## Limitation
 
