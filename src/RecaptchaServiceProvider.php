@@ -36,15 +36,13 @@ class RecaptchaServiceProvider extends ServiceProvider
      */
     public function addValidator()
     {
-        $validator = $this->app['Validator'];
-        
-        $validator::extend('recaptcha', function($attribute, $value, $parameters)
+        $this->app->validator->extend('recaptcha', function($attribute, $value, $parameters)
         {
             $captcha = app('recaptcha.service');
             $challenge = app('Input')->get($captcha->getResponseKey());
             
             return $captcha->check($challenge, $value);
-        });
+        }, 'Please ensure that you are a human!');
     }
     
     /**
