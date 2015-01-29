@@ -66,22 +66,38 @@ It's also recommended to add `required` when validating.
 
 ## Customization
 
-reCAPTCHA allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/customization). You can configure the output of the captcha in several ways.
+reCAPTCHA v2 allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/display). You can configure the output of the captcha through four allowed keys: `theme`, `type`, `lang`, and `callback`.
 
 In the config file, you can create an `options` array to set the default behavior. For example:
 
 ```php
     // ...
     'options' => array(
-		'theme' => 'white',
+		'lang' => 'ja',
 	),
 ```
 
-would default all the reCAPTCHAs to the white theme. If you want to further customize, you can pass options through the render option:
+would default the language in all the reCAPTCHAs to Japanese. If you want to further customize, you can pass options through the render option:
 
 ```php
-echo Recaptcha::render(array('theme' => 'blackglass'));
+echo Recaptcha::render(array('lang' => 'fr'));
 ```
+
+Options passed into `Recaptcha::render` will always supercede the configuration.
+
+### Language
+
+To change the language of the captcha, simply pass in a language as part of the options:
+
+```php
+    'options' => array(
+        'lang' => 'fr',
+	),
+```
+
+For a list of valid language codes, consulting [the official documentation](https://developers.google.com/recaptcha/docs/language).
+
+### Custom template
 
 Alternatively, if you want to set a default template instead of the standard one, you can use the config:
 
@@ -96,17 +112,9 @@ or you can pass it in through the Form option:
 echo Recaptcha::render(array('template' => 'customCaptcha'));
 ```
 
-Options passed into `Recaptcha::render` will always supercede the configuration.
+### v1 customization
 
-To change the language of the captcha, simply pass in a language as part of the options:
-
-```php
-    'options' => array(
-        'lang' => 'fr',
-	),
-```
-
-You can do this both in the config and through the `Recaptcha::render()` call.
+For the v1 customization options, consult [the old documentation](https://developers.google.com/recaptcha/old/docs/customization) and apply accordingly.
 
 ## Limitation
 
