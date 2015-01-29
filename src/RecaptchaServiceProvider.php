@@ -36,7 +36,7 @@ class RecaptchaServiceProvider extends ServiceProvider
      */
     public function addValidator()
     {
-        $this->app->validator->extend('recaptcha', function($attribute, $value, $parameters)
+        $this->app->validator->extendImplicit('recaptcha', function($attribute, $value, $parameters)
         {
             $captcha = app('recaptcha.service');
             $challenge = app('Input')->get($captcha->getResponseKey());
