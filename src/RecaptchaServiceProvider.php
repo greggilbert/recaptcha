@@ -28,7 +28,7 @@ class RecaptchaServiceProvider extends ServiceProvider
     {
         $this->addValidator();
         
-        $this->loadViewsFrom('recaptcha', __DIR__ . '/views');
+        $this->loadViewsFrom(__DIR__ . '/views', 'recaptcha');
     }
     
     /**
