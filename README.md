@@ -118,5 +118,5 @@ For the v1 customization options, consult [the old documentation](https://develo
 
 ## Limitation
 
-Because of Google's way of displaying the reCAPTCHA, this package won't work if you load your form from an ajaxAJAX call.
+Because of Google's way of displaying the reCAPTCHA, this package won't work if you load your form from an AJAX call.
 If you need to do it, you should use one of [the alternate methods provided by Google](https://developers.google.com/recaptcha/docs/display?csw=1).
