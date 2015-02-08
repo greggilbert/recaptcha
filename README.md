@@ -1,9 +1,9 @@
 Recaptcha
 =========
 
-A reCAPTCHA Validator for Laravel 5.
+A reCAPTCHA Validator for Laravel 5. 
 
-# Currently in beta. Use 1.x for Laravel 4.
+> (Looking for a Laravel 4 version? Pull the latest 1.x tag.)
 
 ## Installation
 
@@ -12,7 +12,7 @@ Add the following line to the `require` section of `composer.json`:
 ```json
 {
     "require": {
-        "greggilbert/recaptcha": "dev-develop"
+        "greggilbert/recaptcha": "dev-master"
     }
 }
 ```
