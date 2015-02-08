@@ -12,7 +12,7 @@ Add the following line to the `require` section of `composer.json`:
 ```json
 {
     "require": {
-        "greggilbert/recaptcha": "dev-master"
+        "greggilbert/recaptcha": "dev-develop"
     }
 }
 ```
@@ -41,7 +41,7 @@ Add the following line to the `require` section of `composer.json`:
 ## Usage
 
 ### v2 (No Captcha)
-1. In your form, use `{{ Recaptcha::render() }}` to echo out the markup.
+1. In your form, use `{!! Recaptcha::render() !!}` to echo out the markup.
 2. In your validation rules, add the following:
 
 ```php
@@ -52,7 +52,7 @@ Add the following line to the `require` section of `composer.json`:
 ```
 
 ### v1 (Legacy)
-1. In your form, use `{{ Recaptcha::render() }}` to echo out the markup.
+1. In your form, use `{!! Recaptcha::render() !!}` to echo out the markup.
 2. In your validation rules, add the following:
 
 ```php
