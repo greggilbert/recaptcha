@@ -80,7 +80,7 @@ class RecaptchaServiceProvider extends ServiceProvider
     
     protected function handleConfig()
     {
-        $packageConfig = __DIR__.'/../../config/recaptcha.php';
+        $packageConfig = __DIR__.'/config/recaptcha.php';
         $destinationConfig = config_path('recaptcha.php');
         
         $this->publishes(array(
