@@ -1,12 +1,15 @@
 <?php
-function renderDataAttributes($attributes)
+if( ! function_exists('renderDataAttributes'))
 {
+  function renderDataAttributes($attributes)
+  {
     $mapped = array();
     foreach($attributes as $key => $value) {
         $mapped[] = 'data-'.$key.'="'.$value.'"';
     };
 
     return implode(' ', $mapped);
+  }
 }
 ?>
 @if(!empty($options))
