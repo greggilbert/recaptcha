@@ -15,9 +15,6 @@
         "illuminate/support": "*"
     },
     "autoload": {
-        "classmap": [
-            "src/migrations"
-        ],
         "psr-0": {
             "Greggilbert\\Recaptcha": "src/"
         }
