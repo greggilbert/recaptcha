@@ -8,7 +8,7 @@ class Recaptcha
     
     protected $config = array();
     
-    protected $dataParameterKeys = array('theme', 'type', 'callback');
+    protected $dataParameterKeys = array('theme', 'type', 'callback', 'tabindex', 'expired-callback');
     
     public function __construct($service, $config)
     {
