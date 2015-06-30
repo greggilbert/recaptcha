@@ -21,10 +21,10 @@ class CheckRecaptchaV2 implements RecaptchaInterface
             'remoteip'  => app('request')->getClientIp(),
             'response'  => $response,
         ));
-        
+
         $url = 'https://www.google.com/recaptcha/api/siteverify?' . $parameters;
         $checkResponse = null;
-        
+
         // prefer curl, but fall back to file_get_contents
         if('curl' === app('config')->get('recaptcha.driver') && function_exists('curl_version'))
         {
@@ -40,21 +40,29 @@ class CheckRecaptchaV2 implements RecaptchaInterface
         {
             $checkResponse = file_get_contents($url);
         }
-        
+
         if(is_null($checkResponse) || empty($checkResponse))
         {
             return false;
         }
-        
+
         $decodedResponse = json_decode($checkResponse, true);
         return $decodedResponse['success'];
     }
 
     public function getTemplate()
     {
-        return 'captchav2';
+        if(true === app('config')->get('recaptcha.explicit'))
+        {
+            return 'captchav2explicit';
+        }
+        else
+        {
+            return 'captchav2';
+        }
+
     }
-    
+
     public function getResponseKey()
     {
         return 'g-recaptcha-response';

@@ -15,7 +15,7 @@ return array(
     */
     'public_key'    => '',
     'private_key'    => '',
-    
+
     /*
     |--------------------------------------------------------------------------
     | Template
@@ -33,8 +33,8 @@ return array(
     |
     | Determine how to call out to get response; values are 'curl' or 'native'.
     | Only applies to v2.
-    |    
-    */    
+    |
+    */
     'driver'       => 'curl',
 
     /*
@@ -43,12 +43,12 @@ return array(
     |--------------------------------------------------------------------------
     |
     | Various options for the driver
-    |    
-    */    
+    |
+    */
     'options'       => array(
-        
+
         'curl_timeout' => 1,
-        
+
     ),
 
     /*
@@ -57,8 +57,20 @@ return array(
     |--------------------------------------------------------------------------
     |
     | Set which version of ReCaptcha to use.
-    |    
-    */    
+    |
+    */
     'version'       => 2,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Explicit
+    |--------------------------------------------------------------------------
+    |
+    | Set if you want to use the explicit version of recaptcha (async).
+    | Only applies to v2.
+    |
+    | Remember to add Recaptcha::includeJS() before your close body tag
+    |
+    */
+    'explicit'       => true,
 );
