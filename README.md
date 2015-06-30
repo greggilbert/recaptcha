@@ -54,7 +54,7 @@ Add the following line to the `require` section of `composer.json`:
 ### v2 (No Captcha) Explicit
 1. In `/config/recaptcha.php` set `explicit` to `true`.
 2. In your form, use `{!! Recaptcha::render(['id' => 'my-recaptcha-id']) !!}` to echo out the markup (default `id` is `g-recaptcha`).
-3. Before the close body tag, include the javascript configuration and the Google library include `{!! Recaptcha::includeJS() !!}`, you can sent optional parameter to override configuration values or set new url parameters, like a callback or the recaptcha language `{!! Recaptcha::includeJS(['theme' => 'clear', ['parameters' => ['hl' => App::getLocale(), 'onload' => 'onloadCallback'] ]]) !!}`.
+3. Before the close body tag, include the javascript configuration and the Google library `{!! Recaptcha::includeJS() !!}`, you can set optional parameters to overwrite configuration values or set url parameters, like a callback or the recaptcha language `{!! Recaptcha::includeJS(['theme' => 'clear', ['parameters' => ['hl' => App::getLocale(), 'onload' => 'onloadCallback'] ]]) !!}`.
 4. Render explicity the No Captcha, your configuration values will be stored in the global javascript variable `RecaptchaOptions`: `grecaptcha.render(id, RecaptchaOptions);`. For futher understand check [the official documentation](https://developers.google.com/recaptcha/docs/display#explicit_render).
 
 ### v1 (Legacy)
