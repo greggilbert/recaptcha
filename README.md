@@ -66,7 +66,7 @@ It's also recommended to add `required` when validating.
 
 ## Customization
 
-reCAPTCHA v2 allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/display). You can configure the output of the captcha through four allowed keys: `theme`, `type`, `lang`, and `callback`.
+reCAPTCHA v2 allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/display). You can configure the output of the captcha through six allowed keys: `theme`, `type`, `lang`, `callback`, `tabindex` and `expired-callback`.
 
 In the config file, you can create an `options` array to set the default behavior. For example:
 
