@@ -83,9 +83,9 @@ class RecaptchaServiceProvider extends ServiceProvider
         $packageConfig = __DIR__.'/config/recaptcha.php';
         $destinationConfig = config_path('recaptcha.php');
         
-        $this->publishes(array(
+        $this->publishes([
             $packageConfig => $destinationConfig,
-        ));
+        ]);
     }
 
     /**

@@ -16,11 +16,11 @@ class CheckRecaptchaV2 implements RecaptchaInterface
      */
     public function check($challenge, $response)
     {
-        $parameters = http_build_query(array(
+        $parameters = http_build_query([
             'secret'    => app('config')->get('recaptcha.private_key'),
             'remoteip'  => app('request')->getClientIp(),
             'response'  => $response,
-        ));
+        ]);
         
         $url = 'https://www.google.com/recaptcha/api/siteverify?' . $parameters;
         $checkResponse = null;

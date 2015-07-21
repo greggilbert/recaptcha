@@ -20,12 +20,12 @@ class CheckRecaptcha implements RecaptchaInterface
      */
     public function check($challenge, $response)
     {
-        $parameters = http_build_query(array(
+        $parameters = http_build_query([
             'privatekey'    => app('config')->get('recaptcha.private_key'),
             'remoteip'      => app('request')->getClientIp(),
             'challenge'     => $challenge,
             'response'      => $response,
-        ));
+        ]);
 
         $http_request  = "POST " . self::ENDPOINT . " HTTP/1.0\r\n";
         $http_request .= "Host: " . self::VERIFY_SERVER . "\r\n";

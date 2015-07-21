@@ -3,7 +3,7 @@ if( ! function_exists('renderDataAttributes'))
 {
   function renderDataAttributes($attributes)
   {
-    $mapped = array();
+    $mapped = [ ];
     foreach($attributes as $key => $value) {
         $mapped[] = 'data-'.$key.'="'.$value.'"';
     };

@@ -6,9 +6,9 @@ class Recaptcha
 {
     protected $service;
     
-    protected $config = array();
+    protected $config = [ ];
     
-    protected $dataParameterKeys = array('theme', 'type', 'callback', 'tabindex', 'expired-callback');
+    protected $dataParameterKeys = [ 'theme', 'type', 'callback', 'tabindex', 'expired-callback' ];
     
     public function __construct($service, $config)
     {
@@ -21,15 +21,15 @@ class Recaptcha
      * @param array $options
      * @return view
      */
-    public function render($options = array())
+    public function render($options = [ ])
     {
         $mergedOptions = array_merge($this->config['options'], $options);
         
-        $data = array(
+        $data = [
             'public_key'    => $this->config['public_key'],
             'options'       => $mergedOptions,
             'dataParams'    => $this->extractDataParams($mergedOptions),
-        );
+        ];
 
         if(array_key_exists('lang', $mergedOptions) && "" !== trim($mergedOptions['lang']))
         {
@@ -46,7 +46,7 @@ class Recaptcha
      * @param array $options
      * @return string
      */
-    protected function getView($options = array())
+    protected function getView($options = [ ])
     {
         $view = 'recaptcha::' . $this->service->getTemplate();
 
@@ -70,7 +70,7 @@ class Recaptcha
      * @param array $options
      * @return array
      */
-    protected function extractDataParams($options = array())
+    protected function extractDataParams($options = [ ])
     {
         return array_only($options, $this->dataParameterKeys);
     }
