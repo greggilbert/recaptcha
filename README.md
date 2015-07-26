@@ -45,10 +45,10 @@ Add the following line to the `require` section of `composer.json`:
 2. In your validation rules, add the following:
 
 ```php
-    $rules = array(
+    $rules = [
         // ...
         'g-recaptcha-response' => 'required|recaptcha',
-    );
+    ];
 ```
 
 ### v1 (Legacy)
@@ -56,10 +56,10 @@ Add the following line to the `require` section of `composer.json`:
 2. In your validation rules, add the following:
 
 ```php
-    $rules = array(
+    $rules = [
         // ...
         'recaptcha_response_field' => 'required|recaptcha',
-    );
+    ];
 ```
 
 It's also recommended to add `required` when validating.
@@ -72,15 +72,15 @@ In the config file, you can create an `options` array to set the default behavio
 
 ```php
     // ...
-    'options' => array(
+    'options' => [
 		'lang' => 'ja',
-	),
+	],
 ```
 
 would default the language in all the reCAPTCHAs to Japanese. If you want to further customize, you can pass options through the render option:
 
 ```php
-echo Recaptcha::render(array('lang' => 'fr'));
+echo Recaptcha::render([ 'lang' => 'fr' ]);
 ```
 
 Options passed into `Recaptcha::render` will always supercede the configuration.
@@ -90,9 +90,9 @@ Options passed into `Recaptcha::render` will always supercede the configuration.
 To change the language of the captcha, simply pass in a language as part of the options:
 
 ```php
-    'options' => array(
+    'options' => [
         'lang' => 'fr',
-	),
+	],
 ```
 
 For a list of valid language codes, consulting [the official documentation](https://developers.google.com/recaptcha/docs/language).
@@ -109,7 +109,7 @@ Alternatively, if you want to set a default template instead of the standard one
 or you can pass it in through the Form option:
 
 ```php
-echo Recaptcha::render(array('template' => 'customCaptcha'));
+echo Recaptcha::render([ 'template' => 'customCaptcha' ]);
 ```
 
 ### v1 customization
