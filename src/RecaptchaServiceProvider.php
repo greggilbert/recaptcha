@@ -27,7 +27,7 @@ class RecaptchaServiceProvider extends ServiceProvider
     {
         $this->addValidator();
 
-        $this->loadViewsFrom(__DIR__ . '/views', 'recaptcha');
+        $this->loadViewsFrom(__DIR__.'/views', 'recaptcha');
     }
 
     /**
@@ -36,7 +36,7 @@ class RecaptchaServiceProvider extends ServiceProvider
     public function addValidator()
     {
         $this->app->validator->extendImplicit('recaptcha', function ($attribute, $value, $parameters) {
-            $captcha   = app('recaptcha.service');
+            $captcha = app('recaptcha.service');
             $challenge = app('Input')->get($captcha->getResponseKey());
 
             return $captcha->check($challenge, $value);
@@ -50,8 +50,8 @@ class RecaptchaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->bindRecaptcha();
         $this->handleConfig();
+        $this->bindRecaptcha();
     }
 
     protected function bindRecaptcha()
@@ -70,14 +70,34 @@ class RecaptchaServiceProvider extends ServiceProvider
 
     }
 
+    /**
+     * Check for Lumen version
+     *
+     * @return bool
+     */
+    protected function isLumen()
+    {
+        return str_contains($this->app->version(), 'Lumen') !== false;
+    }
+
+    /**
+     * Handle config
+     *
+     * @return void
+     */
     protected function handleConfig()
     {
-        $packageConfig     = __DIR__ . '/config/recaptcha.php';
-        $destinationConfig = config_path('recaptcha.php');
+        $packageConfig = __DIR__.'/config/recaptcha.php';
 
-        $this->publishes([
-            $packageConfig => $destinationConfig,
-        ]);
+        if ( ! $this->isLumen()) {
+            $destinationConfig = config_path('recaptcha.php');
+
+            $this->publishes([
+                $packageConfig => $destinationConfig,
+            ]);
+        }
+
+        $this->mergeConfigFrom($packageConfig, 'recaptcha');
     }
 
     /**

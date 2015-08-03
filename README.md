@@ -19,6 +19,8 @@ Add the following line to the `require` section of `composer.json`:
 
 ## Setup
 
+### Laravel 5.x:
+
 1. In `/config/app.php`, add the following to `providers`:
   
   ```
@@ -37,6 +39,31 @@ Add the following line to the `require` section of `composer.json`:
   ```php
       "recaptcha" => 'The :attribute field is not correct.',
   ```
+
+### Lumen:
+
+1. In `bootstrap/app.php` add the following lines to register provider:
+
+  ```
+  $app->register(\Greggilbert\Recaptcha\RecaptchaServiceProvider::class);
+  ```
+2. To change the configuration, copy the config file to your config folder and enable it in `bootstrap/app.php`:
+
+  ```
+  $app->configure('recaptcha');
+  ```
+  
+  or you can change some configuration values through environment variables. Available variables:
+  
+  ```
+  reCAPTCHA_PUBLIC_KEY (default is set to empty string)
+  reCAPTCHA_PRIVATE_KEY (default is set to empty string)
+  reCAPTCHA_TEMPLATE (default is set to empty string)
+  reCAPTCHA_DRIVER (default is set to curl)
+  reCAPTCHA_VERSION (default is set to 2)
+  ```
+
+
 
 ## Usage
 
