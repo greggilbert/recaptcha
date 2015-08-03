@@ -13,8 +13,8 @@ return [
     | and private_key is the Secret key.
     |
     */
-    'public_key'  => '',
-    'private_key' => '',
+    'public_key'  => env('reCAPTCHA_PUBLIC_KEY', ''),
+    'private_key' => env('reCAPTCHA_PRIVATE_KEY', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ return [
     | Set a template to use if you don't want to use the standard one.
     |
     */
-    'template'    => '',
+    'template'    => env('reCAPTCHA_TEMPLATE', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ return [
     | Only applies to v2.
     |    
     */
-    'driver'      => 'curl',
+    'driver'      => env('reCAPTCHA_DRIVER', 'curl'),
 
     /*
     |--------------------------------------------------------------------------
@@ -60,6 +60,6 @@ return [
     |    
     */
 
-    'version'     => 2,
+    'version'     => env('reCAPTCHA_VERSION', 2),
 
 ];
