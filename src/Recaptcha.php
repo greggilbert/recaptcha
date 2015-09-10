@@ -17,6 +17,29 @@ class Recaptcha
         $this->service = $service;
         $this->config  = $config;
     }
+    
+    /**
+     * View render
+     *
+     * @param $parameter
+     * @return \Greggilbert\Recaptcha\view
+     */
+    public function instantRender($parameter)
+    {
+        $options = [];
+
+        if (is_string($parameter)) {
+            $this->config['public_key'] = $parameter;
+        }
+
+        if (!empty($parameter['public_key'])) {
+            $this->config['public_key'] = $parameter['public_key'];
+            $options = $parameter;
+        }
+
+        // Array
+        return $this->render($options);
+    }
 
     /**
      * Render the recaptcha
