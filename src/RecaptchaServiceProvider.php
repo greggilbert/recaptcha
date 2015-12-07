@@ -25,22 +25,7 @@ class RecaptchaServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->addValidator();
-
         $this->loadViewsFrom(__DIR__ . '/views', 'recaptcha');
-    }
-
-    /**
-     * Extends Validator to include a recaptcha type
-     */
-    public function addValidator()
-    {
-        $this->app->validator->extendImplicit('recaptcha', function ($attribute, $value, $parameters) {
-            $captcha   = app('recaptcha.service');
-            $challenge = app('Input')->get($captcha->getResponseKey());
-
-            return $captcha->check($challenge, $value);
-        }, 'Please ensure that you are a human!');
     }
 
     /**
@@ -52,6 +37,7 @@ class RecaptchaServiceProvider extends ServiceProvider
     {
         $this->bindRecaptcha();
         $this->handleConfig();
+        $this->addValidator();
     }
 
     protected function bindRecaptcha()
@@ -78,6 +64,23 @@ class RecaptchaServiceProvider extends ServiceProvider
         $this->publishes([
             $packageConfig => $destinationConfig,
         ]);
+    }
+
+    /**
+     * Extends Validator to include a recaptcha type
+     */
+    protected function addValidator()
+    {
+        $this->app->resolving('validator', function ($validator)
+        {
+            $validator->extendImplicit('recaptcha', function($attribute, $value, $parameters)
+            {
+                $captcha = app('recaptcha.service');
+                $challenge = app('Input')->get($captcha->getResponseKey());
+                
+                return $captcha->check($challenge, $value);
+            }, 'Please ensure that you are a human!');
+        });
     }
 
     /**
