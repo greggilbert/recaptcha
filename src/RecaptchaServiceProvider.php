@@ -37,7 +37,7 @@ class RecaptchaServiceProvider extends ServiceProvider
     {
         $this->app->validator->extendImplicit('recaptcha', function ($attribute, $value, $parameters) {
             $captcha   = app('recaptcha.service');
-            $challenge = app('Input')->get($captcha->getResponseKey());
+            $challenge = app('request')->input($captcha->getResponseKey());
 
             return $captcha->check($challenge, $value);
         }, 'Please ensure that you are a human!');
