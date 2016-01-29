@@ -30,7 +30,7 @@ class Recaptcha
         $mergedOptions = array_merge($this->config['options'], $options);
 
         $data = [
-            'public_key' => $this->config['public_key'],
+            'public_key' => value($this->config['public_key']),
             'options'    => $mergedOptions,
             'dataParams' => $this->extractDataParams($mergedOptions),
         ];
