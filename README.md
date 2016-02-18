@@ -83,7 +83,7 @@ would default the language in all the reCAPTCHAs to Japanese. If you want to fur
 echo Recaptcha::render([ 'lang' => 'fr' ]);
 ```
 
-In order to use the [Secure Token](https://developers.google.com/recaptcha/docs/secure_token) you have to use the extra added option of Stoken i order to add the data-stoken field and iformation. For example:
+In order to use the [Secure Token](https://developers.google.com/recaptcha/docs/secure_token) you have to use the extra added option of Stoken. For example:
 
 ```php
     // ...
