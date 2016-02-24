@@ -39,7 +39,7 @@ class Recaptcha
             $data['lang'] = $mergedOptions['lang'];
         }
 
-        if(isset($mergedOptions['useStoken']) && $mergedOptions['useStoken'] === "true") {
+        if((isset($mergedOptions['useStoken']) && $mergedOptions['useStoken'] === "true") || (array_key_exists('useStoken', $mergedOptions) && "true" === trim($mergedOptions['useStoken']))) {
             $config = ['site_key' => $this->config['public_key'], 'site_secret' => $this->config['private_key']];
             $recaptchaToken = new \ReCaptchaSecureToken\ReCaptchaToken($config);
             $data['stoken'] = $recaptchaToken->secureToken(str_random(40));
