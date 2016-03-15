@@ -24,7 +24,7 @@ class CheckRecaptcha implements RecaptchaInterface
     public function check($challenge, $response)
     {
         $parameters = http_build_query([
-            'privatekey' => app('config')->get('recaptcha.private_key'),
+            'privatekey' => value(app('config')->get('recaptcha.private_key')),
             'remoteip'   => app('request')->getClientIp(),
             'challenge'  => $challenge,
             'response'   => $response,

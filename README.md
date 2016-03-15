@@ -28,7 +28,7 @@ Add the following line to the `require` section of `composer.json`:
   ```
   'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
   ```
-2. Run `php artisan vendor:publish`.
+2. Run `php artisan vendor:publish --provider="Greggilbert\Recaptcha\RecaptchaServiceProvider"`.
 3. In `/config/recaptcha.php`, enter your reCAPTCHA public and private keys.
   * If you are not using the most recent version of reCAPTCHA, set `version` to 1. 
   * If you are upgrading to v2 of reCAPTCHA, note that your keys from the previous version will not work, and you need to generate a new set in [the reCAPTCHA admin](https://www.google.com/recaptcha/admin).
@@ -66,7 +66,7 @@ It's also recommended to add `required` when validating.
 
 ## Customization
 
-reCAPTCHA v2 allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/display). You can configure the output of the captcha through six allowed keys: `theme`, `type`, `lang`, `callback`, `tabindex` and `expired-callback`.
+reCAPTCHA v2 allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/display). You can configure the output of the captcha through six allowed keys: `theme`, `type`, `lang`, `callback`, `tabindex`, `expired-callback` and `useStoke`.
 
 In the config file, you can create an `options` array to set the default behavior. For example:
 
@@ -81,6 +81,21 @@ would default the language in all the reCAPTCHAs to Japanese. If you want to fur
 
 ```php
 echo Recaptcha::render([ 'lang' => 'fr' ]);
+```
+
+In order to use the [Secure Token](https://developers.google.com/recaptcha/docs/secure_token) you have to use the extra added option of useSecureToken. For example:
+
+```php
+    // ...
+    'options' => [
+		'useSecureToken' => true,
+	],
+```
+
+would default the use of the secure token in all the reCAPTCHAs rendered elements. If you want to further customize, you can pass the options through the render option:
+
+```php
+echo Recaptcha::render([ 'useSecureToken' => true ]);
 ```
 
 Options passed into `Recaptcha::render` will always supercede the configuration.
