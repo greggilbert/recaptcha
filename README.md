@@ -83,19 +83,19 @@ would default the language in all the reCAPTCHAs to Japanese. If you want to fur
 echo Recaptcha::render([ 'lang' => 'fr' ]);
 ```
 
-In order to use the [Secure Token](https://developers.google.com/recaptcha/docs/secure_token) you have to use the extra added option of Stoken. For example:
+In order to use the [Secure Token](https://developers.google.com/recaptcha/docs/secure_token) you have to use the extra added option of useSecureToken. For example:
 
 ```php
     // ...
     'options' => [
-		'useStoken' => 'true',
+		'useSecureToken' => true,
 	],
 ```
 
 would default the use of the secure token in all the reCAPTCHAs rendered elements. If you want to further customize, you can pass the options through the render option:
 
 ```php
-echo Recaptcha::render([ 'useStoken' => 'true' ]);
+echo Recaptcha::render([ 'useSecureToken' => true ]);
 ```
 
 Options passed into `Recaptcha::render` will always supercede the configuration.
