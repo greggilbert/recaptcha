@@ -26,6 +26,7 @@ class CheckRecaptchaV2 implements RecaptchaInterface
 
         $url           = 'https://www.google.com/recaptcha/api/siteverify?' . $parameters;
         $checkResponse = null;
+        $proxy         = app('config')->get('recaptcha.options.curl_proxy', NULL);
 
         // prefer curl, but fall back to file_get_contents
         if ('curl' === app('config')->get('recaptcha.driver') && function_exists('curl_version')) {
@@ -34,7 +35,9 @@ class CheckRecaptchaV2 implements RecaptchaInterface
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_TIMEOUT, app('config')->get('recaptcha.options.curl_timeout', 1));
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl, CURLOPT_PROXY, app('config')->get('recaptcha.options.curl_proxy', NULL));
+            if (!empty($proxy)) {
+                curl_setopt($curl, CURLOPT_PROXY, $proxy);
+            }
 
             $checkResponse = curl_exec($curl);
         } else {

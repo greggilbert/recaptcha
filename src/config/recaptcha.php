@@ -49,7 +49,7 @@ return [
 
         'curl_timeout' => 1,
 
-        'curl_proxy'   => NULL,
+        'curl_proxy'   => '',
 
     ],
 
