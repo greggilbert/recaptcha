@@ -112,6 +112,20 @@ or you can pass it in through the Form option:
 echo Recaptcha::render([ 'template' => 'customCaptcha' ]);
 ```
 
+### Curl settings (V2 only)
+
+To set the Curl timeout:
+
+```php
+'curl_timeout' => 1, //seconds
+```
+
+To define a proxy server for Curl:
+
+```php
+'curl_proxy'   => 'example.com:3128', // <domain>:<optional port number>
+```
+
 ### v1 customization
 
 For the v1 customization options, consult [the old documentation](https://developers.google.com/recaptcha/old/docs/customization) and apply accordingly.
