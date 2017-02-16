@@ -35,7 +35,7 @@ Add the following line to the `require` section of `composer.json`:
 4. The package ships with a default validation message, but if you want to customize it, add the following line into `resources/lang/[lang]/validation.php`:
   
   ```php
-      "recaptcha" => 'The :attribute field is not correct.',
+      'recaptcha' => 'The :attribute field is not correct.',
   ```
 
 ## Usage
