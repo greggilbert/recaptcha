@@ -1,13 +1,15 @@
 {
-    "name": "greggilbert/recaptcha",
-    "description": "reCAPTCHA Validator for Laravel 5",
-	"keywords": ["recaptcha", "captcha", "laravel", "laravel5"],
-	"homepage": "http://github.com/greggilbert/recaptcha",
+    "name": "ewendlick/recaptcha",
+    "description": "reCAPTCHA Validator for Laravel 5 by greggilbert",
+	"keywords": [],
+	"homepage": "http://github.com/ewendlick/recaptcha",
 	"license": "MIT",
     "authors": [
         {
             "name": "Greg Gilbert",
-            "email": "greg@greg-gilbert.com"
+            "email": "greg@greg-gilbert.com",
+            "name": "Eli Wendlick",
+            "email": "ewendlick@gmail.com"
         }
     ],
     "require": {
@@ -19,12 +21,12 @@
             "src/migrations"
         ],
         "psr-4": {
-            "Greggilbert\\Recaptcha\\": "src/"
+            "Ewendick\\Recaptcha\\": "src/"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1-dev"
+            "dev-master": "2.1.1.3-dev"
         }
     },
     "minimum-stability": "dev"

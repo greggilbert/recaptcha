@@ -49,6 +49,8 @@ return [
 
         'curl_timeout' => 1,
 
+        'curl_proxy'   => '',
+
     ],
 
     /*
