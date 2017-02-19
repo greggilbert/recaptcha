@@ -66,7 +66,7 @@ It's also recommended to add `required` when validating.
 
 ## Customization
 
-reCAPTCHA v2 allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/display). You can configure the output of the captcha through six allowed keys: `theme`, `type`, `lang`, `callback`, `tabindex` and `expired-callback`.
+reCAPTCHA v2 allows for customization of the widget through a number of options, listed [at the official documentation](https://developers.google.com/recaptcha/docs/display). You can configure the output of the captcha through six allowed keys: `theme`, `type`, `lang`, `callback`, `tabindex`, `expired-callback` and `useStoke`.
 
 In the config file, you can create an `options` array to set the default behavior. For example:
 
@@ -81,6 +81,21 @@ would default the language in all the reCAPTCHAs to Japanese. If you want to fur
 
 ```php
 echo Recaptcha::render([ 'lang' => 'fr' ]);
+```
+
+In order to use the [Secure Token](https://developers.google.com/recaptcha/docs/secure_token) you have to use the extra added option of useSecureToken. For example:
+
+```php
+    // ...
+    'options' => [
+		'useSecureToken' => true,
+	],
+```
+
+would default the use of the secure token in all the reCAPTCHAs rendered elements. If you want to further customize, you can pass the options through the render option:
+
+```php
+echo Recaptcha::render([ 'useSecureToken' => true ]);
 ```
 
 Options passed into `Recaptcha::render` will always supercede the configuration.

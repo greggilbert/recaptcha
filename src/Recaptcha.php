@@ -9,7 +9,7 @@ class Recaptcha
 
     protected $config = [ ];
 
-    protected $dataParameterKeys = [ 'theme', 'type', 'callback', 'tabindex', 'expired-callback' ];
+    protected $dataParameterKeys = [ 'theme', 'type', 'callback', 'tabindex', 'expired-callback', 'secure_token' ];
 
 
     public function __construct($service, $config)
@@ -37,6 +37,12 @@ class Recaptcha
 
         if (array_key_exists('lang', $mergedOptions) && "" !== trim($mergedOptions['lang'])) {
             $data['lang'] = $mergedOptions['lang'];
+        }
+
+        if(isset($mergedOptions['useSecureToken']) && $mergedOptions['useSecureToken']) {
+            $config = ['site_key' => $this->config['public_key'], 'site_secret' => $this->config['private_key']];
+            $recaptchaToken = new \ReCaptchaSecureToken\ReCaptchaToken($config);
+            $data['secure_token'] = $recaptchaToken->secureToken(str_random(40));
         }
 
         $view = $this->getView($options);
