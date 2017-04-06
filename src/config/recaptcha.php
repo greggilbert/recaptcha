@@ -48,6 +48,7 @@ return [
     'options'     => [
 
         'curl_timeout' => 1,
+        'curl_verify' => true,
 
     ],
 
