@@ -16,7 +16,7 @@ if ( ! function_exists('renderDataAttributes')) {
         var RecaptchaOptions = <?=json_encode($options) ?>;
     </script>
 @endif
-<script src='https://www.google.com/recaptcha/api.js?render=onload{{ (isset($lang) ? '&hl='.$lang : '') }}'></script>
+<script src='https://www.google.com/recaptcha/api.js?render=onload{{ (isset($lang) ? '&hl='.$lang : '') }}' async defer></script>
 <div class="g-recaptcha" data-sitekey="{{ $public_key }}" <?=renderDataAttributes($dataParams)?>></div>
 <noscript>
     <div style="width: 302px; height: 352px;">
