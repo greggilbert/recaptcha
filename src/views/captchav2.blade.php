@@ -13,6 +13,12 @@ if (!function_exists('renderDataAttributes')) {
 ?>
 @if(!empty($options))
     <script type="text/javascript">
+        /*FIX for MS EDGE*/
+        (function () {
+            if ( typeof NodeList.prototype.forEach === "function" ) return false;
+            NodeList.prototype.forEach = Array.prototype.forEach;
+        })();
+
         var RecaptchaOptions = <?=json_encode($options) ?>;
 
         function laravelRecaptchaInit() {
