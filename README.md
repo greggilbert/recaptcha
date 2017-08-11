@@ -7,14 +7,10 @@ A reCAPTCHA Validator for Laravel 5.
 
 ## Installation
 
-Add the following line to the `require` section of `composer.json`:
+Install the package using Composer.
 
-```json
-{
-    "require": {
-        "greggilbert/recaptcha": "dev-master"
-    }
-}
+```
+composer require greggilbert/recaptcha
 ```
 
 ## Setup
