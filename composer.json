@@ -25,6 +25,14 @@
     "extra": {
         "branch-alias": {
             "dev-master": "2.2-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Greggilbert\\Recaptcha\\RecaptchaServiceProvider"
+            ],
+            "aliases": {
+                "Recaptcha": "Greggilbert\\Recaptcha\\Facades\\Recaptcha"
+            }
         }
     },
     "minimum-stability": "dev"
