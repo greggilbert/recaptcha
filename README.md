@@ -5,6 +5,10 @@ A reCAPTCHA Validator for Laravel 5.
 
 > (Looking for a Laravel 4 version? Pull the latest 1.x tag. For Laravel 5.0, pull the latest 2.0 tag.)
 
+## LOOKING FOR MAINTAINER(S)
+
+tldr; I don't really have time to maintain this package on my own, so I'm looking for help. If you're interested, leave a note on #146. Thanks!
+
 ## Installation
 
 Add the following line to the `require` section of `composer.json`:
