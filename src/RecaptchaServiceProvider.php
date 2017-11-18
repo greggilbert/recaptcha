@@ -50,8 +50,8 @@ class RecaptchaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->bindRecaptcha();
         $this->handleConfig();
+        $this->bindRecaptcha();
     }
 
     protected function bindRecaptcha()
@@ -74,6 +74,10 @@ class RecaptchaServiceProvider extends ServiceProvider
     {
         $packageConfig     = __DIR__ . '/config/recaptcha.php';
         $destinationConfig = config_path('recaptcha.php');
+        
+        $this->mergeConfigFrom(
+		    $packageConfig, 'recaptcha'
+	    );
 
         $this->publishes([
             $packageConfig => $destinationConfig,
