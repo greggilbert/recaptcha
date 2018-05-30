@@ -116,6 +116,20 @@ or you can pass it in through the Form option:
 echo Recaptcha::render([ 'template' => 'customCaptcha' ]);
 ```
 
+### Curl (for V2 only)
+To define a proxy server for Curl:
+
+```php
+    'options' => [
+        'curl_proxy'   => 'yourproxyip.com:3128', // <domain or ip>:<port number>
+	],
+    
+    or on .env add
+    
+    CURL_PROXY=yourproxyip.com:3128 #<domain or ip>:<port number>
+```
+
+
 ### v1 customization
 
 For the v1 customization options, consult [the old documentation](https://developers.google.com/recaptcha/old/docs/customization) and apply accordingly.
