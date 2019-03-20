@@ -16,13 +16,13 @@ if ( ! function_exists('renderDataAttributes')) {
         var RecaptchaOptions = <?=json_encode($options) ?>;
     </script>
 @endif
-<script src='https://www.google.com/recaptcha/api.js?render=onload{{ (isset($lang) ? '&hl='.$lang : '') }}'></script>
+<script src='https://{{ config('recaptcha.recaptcha_domain', 'www.google.com') }}/recaptcha/api.js?render=onload{{ (isset($lang) ? '&hl='.$lang : '') }}'></script>
 <div class="g-recaptcha" data-sitekey="{{ $public_key }}" <?=renderDataAttributes($dataParams)?>></div>
 <noscript>
     <div style="width: 302px; height: 352px;">
         <div style="width: 302px; height: 352px; position: relative;">
             <div style="width: 302px; height: 352px; position: absolute;">
-                <iframe src="https://www.google.com/recaptcha/api/fallback?k={{ $public_key }}"
+                <iframe src="https://{{ config('recaptcha.recaptcha_domain', 'www.google.com') }}/recaptcha/api/fallback?k={{ $public_key }}"
                         frameborder="0" scrolling="no"
                         style="width: 302px; height:352px; border-style: none;">
                 </iframe>
