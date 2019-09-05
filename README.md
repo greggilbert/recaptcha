@@ -1,13 +1,15 @@
+# Abandoned
+
+All good things must come to an end. The sad fact is that I don't have time to maintain this package, so the release of Laravel 6 is as good as any to make a clean break. You should take a look at the forks to see if anyone is carrying on the torch.
+
+Thanks to everyone for sticking by this package for years!
+
 Recaptcha
 =========
 
 A reCAPTCHA Validator for Laravel 5. 
 
 > (Looking for a Laravel 4 version? Pull the latest 1.x tag. For Laravel 5.0, pull the latest 2.0 tag.)
-
-## LOOKING FOR MAINTAINER(S)
-
-tldr; I don't really have time to maintain this package on my own, so I'm looking for help. If you're interested, leave a note on #146. Thanks!
 
 ## Installation
 
