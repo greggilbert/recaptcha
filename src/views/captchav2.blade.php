@@ -1,8 +1,8 @@
 <?php
-if ( ! function_exists('renderDataAttributes')) {
+if (!function_exists('renderDataAttributes')) {
     function renderDataAttributes($attributes)
     {
-        $mapped = [ ];
+        $mapped = [];
         foreach ($attributes as $key => $value) {
             $mapped[] = 'data-' . $key . '="' . $value . '"';
         };
@@ -13,10 +13,38 @@ if ( ! function_exists('renderDataAttributes')) {
 ?>
 @if(!empty($options))
     <script type="text/javascript">
+        /*FIX for MS EDGE*/
+        (function () {
+            if ( typeof NodeList.prototype.forEach === "function" ) return false;
+            NodeList.prototype.forEach = Array.prototype.forEach;
+        })();
+
         var RecaptchaOptions = <?=json_encode($options) ?>;
+
+        function laravelRecaptchaInit() {
+            var laravelRecaptchaCaptchas = document.querySelectorAll(".g-recaptcha");
+            if (laravelRecaptchaCaptchas.length) {
+                laravelRecaptchaCaptchas.forEach(function (item, index) {
+                    grecaptcha.render(item, {'sitekey': item.getAttribute("data-sitekey")});
+                });
+            }
+        }
     </script>
 @endif
-<script src='https://www.google.com/recaptcha/api.js?render=onload{{ (isset($lang) ? '&hl='.$lang : '') }}'></script>
+<script type="text/javascript">
+    if (!window.greggilbertRecaptchaLoaded) {
+        (function () {
+            var po = document.createElement('script');
+            po.type = 'text/javascript';
+            po.async = true;
+            po.src = 'https://www.google.com/recaptcha/api.js?onload=laravelRecaptchaInit&render=explicit{!! (isset($lang) ? '&hl='.$lang : '') !!}';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(po, s);
+        })();
+    }
+
+    window.greggilbertRecaptchaLoaded = true;
+</script>
 <div class="g-recaptcha" data-sitekey="{{ $public_key }}" <?=renderDataAttributes($dataParams)?>></div>
 <noscript>
     <div style="width: 302px; height: 352px;">
