@@ -49,7 +49,7 @@ return [
 
         'curl_timeout' => 1,
         'curl_verify' => true,
-
+        'curl_proxy' => env('CURL_PROXY','')
     ],
 
     /*

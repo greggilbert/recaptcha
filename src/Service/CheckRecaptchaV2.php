@@ -27,14 +27,22 @@ class CheckRecaptchaV2 implements RecaptchaInterface
         $url           = 'https://www.google.com/recaptcha/api/siteverify?' . $parameters;
         $checkResponse = null;
 
+        $proxy = app('config')->get('recaptcha.options.curl_proxy', '');
+
         // prefer curl, but fall back to file_get_contents
         if ('curl' === app('config')->get('recaptcha.driver') && function_exists('curl_version')) {
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_HEADER, false);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_TIMEOUT, app('config')->get('recaptcha.options.curl_timeout', 1));
-            if(app('config')->get('recaptcha.options.curl_verify') === false) {
-              curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+            //set proxy
+            if ($proxy) {
+                curl_setopt($curl, CURLOPT_PROXY, $proxy);
+            }
+
+            if (app('config')->get('recaptcha.options.curl_verify') === false) {
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             }
 
             $checkResponse = curl_exec($curl);
@@ -43,7 +51,20 @@ class CheckRecaptchaV2 implements RecaptchaInterface
               app('log')->error('[Recaptcha] CURL error: '.curl_error($curl));
             }
         } else {
-            $checkResponse = file_get_contents($url);
+            if($proxy) { //when has proxy
+                $context = array(
+                    'http' => array(
+                        'proxy' => $proxy,
+                        'request_fulluri' => True,
+                    ),
+                );
+
+                $context = stream_context_create($context);
+
+                $checkResponse = file_get_contents($url, False, $context);
+            } else {
+                $checkResponse = file_get_contents($url);
+            }
         }
 
         if (is_null($checkResponse) || empty( $checkResponse )) {
