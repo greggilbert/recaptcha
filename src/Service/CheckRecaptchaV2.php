@@ -62,6 +62,6 @@ class CheckRecaptchaV2 implements RecaptchaInterface
 
     public function getResponseKey()
     {
-        return 'g-recaptcha-response';
+        return app('config')->get('recaptcha.response_key');
     }
 }
