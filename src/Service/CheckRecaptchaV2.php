@@ -33,7 +33,7 @@ class CheckRecaptchaV2 implements RecaptchaInterface
             curl_setopt($curl, CURLOPT_HEADER, false);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_TIMEOUT, app('config')->get('recaptcha.options.curl_timeout', 1));
-            if(app('config')->get('recaptcha.options.curl_verify') === false) {
+            if(app('config')->get('recaptcha.options.curl_verify') === true) {
               curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             }
 
