@@ -16,7 +16,11 @@ if ( ! function_exists('renderDataAttributes')) {
         var RecaptchaOptions = <?=json_encode($options) ?>;
     </script>
 @endif
-<script src='https://www.google.com/recaptcha/api.js?render=onload{{ (isset($lang) ? '&hl='.$lang : '') }}'></script>
+<script type="text/JavaScript">
+    var script = document.createElement('SCRIPT');
+    script.src = 'https://www.google.com/recaptcha/api.js?render=onload{{ (isset($lang) ? '&hl='.$lang : '') }}';
+    document.getElementsByTagName('HEAD')[0].appendChild(script);
+</script>
 <div class="g-recaptcha" data-sitekey="{{ $public_key }}" <?=renderDataAttributes($dataParams)?>></div>
 <noscript>
     <div style="width: 302px; height: 352px;">
