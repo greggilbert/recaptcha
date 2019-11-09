@@ -7,6 +7,7 @@ namespace Greggilbert\Recaptcha\Service;
  */
 class CheckRecaptchaV2 implements RecaptchaInterface
 {
+    private $cached;
 
     /**
      * Call out to reCAPTCHA and process the response
@@ -18,6 +19,10 @@ class CheckRecaptchaV2 implements RecaptchaInterface
      */
     public function check($challenge, $response)
     {
+        if ($this->cached) {
+            return $this->cached;
+        }
+
         $parameters = http_build_query([
             'secret'   => value(app('config')->get('recaptcha.private_key')),
             'remoteip' => app('request')->getClientIp(),
@@ -52,7 +57,7 @@ class CheckRecaptchaV2 implements RecaptchaInterface
 
         $decodedResponse = json_decode($checkResponse, true);
 
-        return $decodedResponse['success'];
+        return $this->cached = $decodedResponse['success'];
     }
 
     public function getTemplate()
