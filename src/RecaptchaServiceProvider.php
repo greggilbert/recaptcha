@@ -35,12 +35,16 @@ class RecaptchaServiceProvider extends ServiceProvider
      */
     public function addValidator()
     {
+        $translator = app('translator');
+        $translator->addNamespace('recaptcha', __DIR__ . '/lang');
+        $translator->load('recaptcha', 'recaptcha', $translator->locale());
+
         $this->app->validator->extendImplicit('recaptcha', function ($attribute, $value, $parameters) {
             $captcha   = app('recaptcha.service');
             $challenge = app('request')->input($captcha->getResponseKey());
 
             return $captcha->check($challenge, $value);
-        }, 'Please ensure that you are a human!');
+        }, $translator->get('recaptcha::recaptcha.error'));
     }
 
     /**
