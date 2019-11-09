@@ -63,4 +63,16 @@ return [
 
     'version'     => 2,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Recaptcha domain
+    |--------------------------------------------------------------------------
+    |
+    | This can be set either to www.google.com or www.recaptcha.net for use in
+    | locations where www.google.com is not available
+    | https://developers.google.com/recaptcha/docs/faq#can-i-use-recaptcha-globally
+    |
+    */
+    'recaptcha_domain'  => 'www.google.com'
+
 ];

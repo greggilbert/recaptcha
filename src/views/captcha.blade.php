@@ -4,9 +4,9 @@
     </script>
 @endif
 <script type="text/javascript"
-        src="//www.google.com/recaptcha/api/challenge?k=<?php echo $public_key ?><?php echo( isset( $lang ) ? '&hl=' . $lang : '' ) ?>"></script>
+        src="//{{ config('recaptcha.recaptcha_domain', 'www.google.com') }}/recaptcha/api/challenge?k=<?php echo $public_key ?><?php echo( isset( $lang ) ? '&hl=' . $lang : '' ) ?>"></script>
 <noscript>
-    <iframe src="//www.google.com/recaptcha/api/noscript?k=<?php echo $public_key ?><?php echo( isset( $lang ) ? '&hl=' . $lang : '' ) ?>"
+    <iframe src="//{{ config('recaptcha.recaptcha_domain', 'www.google.com') }}/recaptcha/api/noscript?k=<?php echo $public_key ?><?php echo( isset( $lang ) ? '&hl=' . $lang : '' ) ?>"
             height="300" width="500" frameborder="0"></iframe>
     <br>
     <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
